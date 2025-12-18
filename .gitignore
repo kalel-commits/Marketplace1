@@ -35,3 +35,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+
+# Firebase / GCP secrets
+*.firebase-adminsdk-*.json
+firebase-adminsdk-*.json
+*firebase-adminsdk*.json
+
+# local env
+.env.local
+.env
+
