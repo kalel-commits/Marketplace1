@@ -95,7 +95,7 @@ export default function CreateTaskPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
       </div>
     )
@@ -104,21 +104,21 @@ export default function CreateTaskPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white mb-8">Create New Task</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Create New Task</h1>
           
           <Card>
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-300">
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                 Task Title *
               </label>
               <input
                 type="text"
                 id="title"
                 required
-                className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                 placeholder="e.g., Create a modern website for my restaurant"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -133,7 +133,7 @@ export default function CreateTaskPage() {
                 id="description"
                 required
                 rows={6}
-                className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                 placeholder="Describe your task in detail..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -147,7 +147,7 @@ export default function CreateTaskPage() {
               <select
                 id="category"
                 required
-                className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
@@ -171,7 +171,7 @@ export default function CreateTaskPage() {
                   required
                   min="0"
                   step="0.01"
-                  className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   placeholder="5000"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
@@ -186,7 +186,7 @@ export default function CreateTaskPage() {
                   type="text"
                   id="location"
                   required
-                  className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   placeholder="e.g., Mumbai, Maharashtra"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}

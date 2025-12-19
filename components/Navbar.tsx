@@ -24,13 +24,13 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-gray-900 shadow-lg border-b border-gray-800">
+    <nav className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Logo size="md" />
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             {user ? (
               <>
                 <Link
@@ -39,19 +39,19 @@ export default function Navbar() {
                     user.role === 'business_owner' ? '/dashboard/business' : 
                     '/dashboard/freelancer'
                   }
-                  className="text-gray-300 hover:text-primary-400 transition-colors"
+                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium"
                 >
                   Dashboard
                 </Link>
                 <Link
                   href="/profile"
-                  className="text-gray-300 hover:text-primary-400 transition-colors"
+                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium"
                 >
                   Profile
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="text-gray-300 hover:text-primary-400 transition-colors"
+                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium"
                 >
                   Sign Out
                 </button>
@@ -60,13 +60,13 @@ export default function Navbar() {
               <>
                 <Link
                   href="/login"
-                  className="text-gray-300 hover:text-primary-400 transition-colors"
+                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium"
                 >
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-500 transition-colors"
+                  className="bg-primary-500 text-white px-5 py-2 rounded-md hover:bg-primary-600 transition-colors font-medium"
                 >
                   Sign Up
                 </Link>

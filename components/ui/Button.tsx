@@ -16,11 +16,11 @@ export default function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed'
+  const baseStyles = 'font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed'
   
   const variants = {
-    primary: 'bg-primary-600 text-white hover:bg-primary-500 focus:ring-primary-500',
-    secondary: 'border border-gray-700 text-gray-300 hover:bg-gray-800 focus:ring-gray-500',
+    primary: 'bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500',
+    secondary: 'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-gray-500',
     danger: 'bg-red-600 text-white hover:bg-red-500 focus:ring-red-500',
     success: 'bg-green-600 text-white hover:bg-green-500 focus:ring-green-500',
   }

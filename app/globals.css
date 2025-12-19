@@ -3,19 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 17, 24, 39;
+  --foreground-rgb: 17, 24, 39;
+  --background-rgb: 255, 255, 255;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
   min-height: 100vh;
 }
 
@@ -25,11 +19,11 @@ body {
   }
 }
 
-/* Dark theme input styling */
+/* Light theme input styling - Fiverr-like */
 input, textarea, select {
-  color: #f9fafb !important; /* gray-50 */
-  background-color: #1f2937 !important; /* gray-800 */
-  border-color: #374151 !important; /* gray-700 */
+  color: #111827 !important; /* gray-900 */
+  background-color: #ffffff !important; /* white */
+  border-color: #d1d5db !important; /* gray-300 */
 }
 
 input::placeholder, textarea::placeholder {
@@ -37,7 +31,9 @@ input::placeholder, textarea::placeholder {
 }
 
 input:focus, textarea:focus, select:focus {
-  background-color: #111827 !important; /* gray-900 */
-  border-color: #3b82f6 !important; /* blue-500 */
+  background-color: #ffffff !important; /* white */
+  border-color: #1dbf73 !important; /* Fiverr green */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(29, 191, 115, 0.1);
 }
 

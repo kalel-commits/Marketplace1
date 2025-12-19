@@ -16,19 +16,19 @@ export default function Logo({ className = '', showTagline = false, size = 'md' 
   return (
     <Link href="/" className={`flex items-center space-x-3 group ${className}`}>
       {/* Logo Icon */}
-      <div className={`flex items-center ${sizeClasses[size]} font-bold text-white`}>
-        <span className="text-primary-400">&lt;</span>
-        <span className="text-white">▶</span>
-        <span className="text-primary-400">&gt;&gt;</span>
+      <div className={`flex items-center ${sizeClasses[size]} font-bold`}>
+        <span className="text-primary-500">&lt;</span>
+        <span className="text-gray-900">▶</span>
+        <span className="text-primary-500">&gt;&gt;</span>
       </div>
       
       {/* Brand Name */}
       <div className="flex flex-col">
-        <span className={`${sizeClasses[size]} font-bold text-white group-hover:text-primary-400 transition-colors`}>
+        <span className={`${sizeClasses[size]} font-bold text-gray-900 group-hover:text-primary-500 transition-colors`}>
           Prolance
         </span>
         {showTagline && (
-          <span className="text-xs text-gray-400 font-normal">
+          <span className="text-xs text-gray-600 font-normal">
             Connecting Talent & Projects
           </span>
         )}

@@ -56,7 +56,7 @@ export default function FreelancerDashboard() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-black py-8">
+        <div className="min-h-screen bg-gray-50 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {Array.from({ length: 3 }).map((_, i) => (
@@ -83,7 +83,7 @@ export default function FreelancerDashboard() {
       <div className="min-h-screen bg-black py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-white">Freelancer Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Freelancer Dashboard</h1>
             <Link href="/tasks">
               <Button>Browse All Tasks</Button>
             </Link>
@@ -91,15 +91,15 @@ export default function FreelancerDashboard() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Pending Applications</div>
+              <div className="text-sm font-medium text-gray-600">Pending Applications</div>
               <div className="mt-2 text-3xl font-bold text-yellow-400">{pendingApps}</div>
             </Card>
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Accepted</div>
+              <div className="text-sm font-medium text-gray-600">Accepted</div>
               <div className="mt-2 text-3xl font-bold text-green-400">{acceptedApps}</div>
             </Card>
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Rejected</div>
+              <div className="text-sm font-medium text-gray-600">Rejected</div>
               <div className="mt-2 text-3xl font-bold text-red-400">{rejectedApps}</div>
             </Card>
           </div>
@@ -107,7 +107,7 @@ export default function FreelancerDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-white">My Applications</h2>
+                <h2 className="text-xl font-bold text-gray-900">My Applications</h2>
               </div>
               {myApplications.length === 0 ? (
                 <EmptyState
@@ -124,12 +124,12 @@ export default function FreelancerDashboard() {
                     <Link
                       key={app.id}
                       href={`/tasks/${app.task_id}`}
-                      className="block border border-gray-800 rounded-lg p-4 hover:bg-gray-800 transition-colors"
+                      className="block border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h3 className="font-medium text-white">{app.task?.title || 'Task'}</h3>
-                          <p className="text-sm text-gray-400 mt-1 line-clamp-2">{app.proposal}</p>
+                          <h3 className="font-medium text-gray-900">{app.task?.title || 'Task'}</h3>
+                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">{app.proposal}</p>
                           <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
                             {app.task?.category && <span>{app.task.category}</span>}
                             {app.task?.location && <span>📍 {app.task.location}</span>}
@@ -156,7 +156,7 @@ export default function FreelancerDashboard() {
 
             <Card className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-white">Available Tasks</h2>
+                <h2 className="text-xl font-bold text-gray-900">Available Tasks</h2>
                 <Link
                   href="/tasks"
                   className="text-primary-400 hover:text-primary-300 text-sm transition-colors"
@@ -175,12 +175,12 @@ export default function FreelancerDashboard() {
                     <Link
                       key={task.id}
                       href={`/tasks/${task.id}`}
-                      className="block border border-gray-800 rounded-lg p-4 hover:bg-gray-800 transition-colors"
+                      className="block border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h3 className="font-medium text-white">{task.title}</h3>
-                          <p className="text-sm text-gray-400 mt-1 line-clamp-2">{task.description}</p>
+                          <h3 className="font-medium text-gray-900">{task.title}</h3>
+                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">{task.description}</p>
                           <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
                             <span>{task.category}</span>
                             <span>📍 {task.location}</span>

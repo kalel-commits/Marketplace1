@@ -41,8 +41,8 @@ export default function FreelancerReels({ reels, freelancerName }: FreelancerRee
   }
 
   return (
-    <div className="mt-4 pt-4 border-t border-gray-800">
-      <h4 className="text-sm font-semibold text-white mb-3">
+    <div className="mt-4 pt-4 border-t border-gray-200">
+      <h4 className="text-sm font-semibold text-gray-900 mb-3">
         {freelancerName ? `${freelancerName}'s Sample Reels` : 'Sample Reels'}
       </h4>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -51,7 +51,7 @@ export default function FreelancerReels({ reels, freelancerName }: FreelancerRee
           return (
             <div key={index} className="relative group">
               {embedURL ? (
-                <div className="w-full h-40 rounded-lg border border-gray-700 overflow-hidden bg-gray-900">
+                <div className="w-full h-40 rounded-lg border border-gray-300 overflow-hidden bg-gray-100">
                   <iframe
                     src={embedURL}
                     className="w-full h-full"
@@ -61,12 +61,12 @@ export default function FreelancerReels({ reels, freelancerName }: FreelancerRee
                   />
                 </div>
               ) : (
-                <div className="w-full h-40 rounded-lg border border-gray-700 bg-gray-800 flex items-center justify-center">
+                <div className="w-full h-40 rounded-lg border border-gray-300 bg-gray-50 flex items-center justify-center">
                   <a
                     href={reel}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                    className="text-primary-500 hover:text-primary-600 text-sm font-medium"
                   >
                     Watch on {getPlatformName(reel)} →
                   </a>
@@ -79,7 +79,7 @@ export default function FreelancerReels({ reels, freelancerName }: FreelancerRee
           )
         })}
       </div>
-      <p className="text-xs text-gray-500 mt-2">
+      <p className="text-xs text-gray-600 mt-2">
         Watch these sample reels to see their editing style and quality
       </p>
     </div>

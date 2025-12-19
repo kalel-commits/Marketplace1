@@ -65,7 +65,7 @@ export default function BusinessDashboard() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-black py-8">
+        <div className="min-h-screen bg-gray-50 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
               {Array.from({ length: 4 }).map((_, i) => (
@@ -89,10 +89,10 @@ export default function BusinessDashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-white">Business Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Business Dashboard</h1>
             <Link href="/tasks/create">
               <Button>+ Create New Task</Button>
             </Link>
@@ -100,7 +100,7 @@ export default function BusinessDashboard() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Open Tasks</div>
+              <div className="text-sm font-medium text-gray-600">Open Tasks</div>
               <div className="mt-2 text-3xl font-bold text-primary-400">{stats.openTasks}</div>
             </Card>
             <Card className="p-6">
@@ -120,7 +120,7 @@ export default function BusinessDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card className="p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-white">My Tasks</h2>
+                <h2 className="text-xl font-bold text-gray-900">My Tasks</h2>
                 <Link
                   href="/tasks/create"
                   className="text-primary-400 hover:text-primary-300 text-sm transition-colors"
@@ -143,12 +143,12 @@ export default function BusinessDashboard() {
                     <Link
                       key={task.id}
                       href={`/tasks/${task.id}`}
-                      className="block border border-gray-800 rounded-lg p-4 hover:bg-gray-800 transition-colors"
+                      className="block border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h3 className="font-medium text-white">{task.title}</h3>
-                          <p className="text-sm text-gray-400 mt-1 line-clamp-2">{task.description}</p>
+                          <h3 className="font-medium text-gray-900">{task.title}</h3>
+                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">{task.description}</p>
                           <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
                             <span>{task.category}</span>
                             <span>📍 {task.location}</span>
@@ -172,7 +172,7 @@ export default function BusinessDashboard() {
             </Card>
 
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-white mb-4">Recent Applications</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Applications</h2>
               {recentApplications.length === 0 ? (
                 <EmptyState
                   title="No applications yet"
@@ -184,14 +184,14 @@ export default function BusinessDashboard() {
                     <Link
                       key={app.id}
                       href={`/tasks/${app.task_id}`}
-                      className="block border border-gray-800 rounded-lg p-4 hover:bg-gray-800 transition-colors"
+                      className="block border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
                     >
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="font-medium text-white">
+                          <p className="font-medium text-gray-900">
                             {app.freelancer?.full_name || 'Unknown'}
                           </p>
-                          <p className="text-sm text-gray-400 mt-1 line-clamp-2">{app.proposal}</p>
+                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">{app.proposal}</p>
                           <p className="text-xs text-gray-500 mt-2">
                             Applied to: {app.task?.title || 'Task'}
                           </p>

@@ -146,7 +146,7 @@ export default function AdminDashboard() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-black py-8">
+        <div className="min-h-screen bg-gray-50 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
               {Array.from({ length: 4 }).map((_, i) => (
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
       <div className="min-h-screen bg-black py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
             <Button onClick={loadData} variant="secondary">
               Refresh Data
             </Button>
@@ -174,28 +174,28 @@ export default function AdminDashboard() {
           {/* Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Total Users</div>
-              <div className="mt-2 text-3xl font-bold text-primary-400">{stats.totalUsers}</div>
+              <div className="text-sm font-medium text-gray-600">Total Users</div>
+              <div className="mt-2 text-3xl font-bold text-primary-500">{stats.totalUsers}</div>
               <div className="text-xs text-gray-500 mt-1">
                 {stats.businessOwners} Business Owners, {stats.freelancers} Freelancers
               </div>
             </Card>
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Total Tasks</div>
+              <div className="text-sm font-medium text-gray-600">Total Tasks</div>
               <div className="mt-2 text-3xl font-bold text-blue-400">{stats.totalTasks}</div>
               <div className="text-xs text-gray-500 mt-1">
                 {stats.openTasks} Open, {stats.inProgressTasks} In Progress, {stats.completedTasks} Completed
               </div>
             </Card>
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">Total Applications</div>
+              <div className="text-sm font-medium text-gray-600">Total Applications</div>
               <div className="mt-2 text-3xl font-bold text-green-400">{stats.totalApplications}</div>
               <div className="text-xs text-gray-500 mt-1">
                 {stats.pendingApplications} Pending, {stats.acceptedApplications} Accepted, {stats.rejectedApplications} Rejected
               </div>
             </Card>
             <Card className="p-6">
-              <div className="text-sm font-medium text-gray-400">System Status</div>
+              <div className="text-sm font-medium text-gray-600">System Status</div>
               <div className="mt-2 text-sm text-green-400 font-semibold">All Systems Operational</div>
             </Card>
           </div>
@@ -210,8 +210,8 @@ export default function AdminDashboard() {
                     onClick={() => setActiveTab(tab)}
                     className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                       activeTab === tab
-                        ? 'border-primary-500 text-primary-400'
-                        : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-700'
+                        ? 'border-primary-500 text-primary-500'
+                        : 'border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -226,7 +226,7 @@ export default function AdminDashboard() {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+              className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -236,26 +236,26 @@ export default function AdminDashboard() {
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <Card className="p-6">
-                <h2 className="text-xl font-bold text-white mb-4">Recent Users</h2>
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Users</h2>
                 <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-800">
-                    <thead className="bg-gray-800">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-100">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Name</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Email</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Role</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Joined</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Name</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Email</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Role</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Joined</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-gray-900 divide-y divide-gray-800">
+                    <tbody className="bg-white divide-y divide-gray-200">
                       {allUsers.slice(0, 5).map((u) => (
-                        <tr key={u.id} className="hover:bg-gray-800 transition-colors">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{u.full_name}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{u.email}</td>
+                        <tr key={u.id} className="hover:bg-gray-50 transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{u.full_name}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{u.email}</td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <StatusBadge status={u.role === 'admin' ? 'completed' : u.role === 'business_owner' ? 'in_progress' : 'open'} type="task" />
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                             {new Date(u.created_at).toLocaleDateString()}
                           </td>
                         </tr>
@@ -270,47 +270,47 @@ export default function AdminDashboard() {
           {/* Users Tab */}
           {activeTab === 'users' && (
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-white mb-4">All Users ({filteredUsers.length})</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">All Users ({filteredUsers.length})</h2>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-800">
-                  <thead className="bg-gray-800">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-100">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Email</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Instagram</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Joined</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Role</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Location</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Instagram</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Joined</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-gray-900 divide-y divide-gray-800">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {filteredUsers.map((u) => (
-                      <tr key={u.id} className="hover:bg-gray-800 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{u.full_name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{u.email}</td>
+                      <tr key={u.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{u.full_name}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{u.email}</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`px-2 py-1 text-xs rounded ${
-                            u.role === 'admin' ? 'bg-purple-900/50 text-purple-300 border border-purple-700' :
-                            u.role === 'business_owner' ? 'bg-blue-900/50 text-blue-300 border border-blue-700' :
-                            'bg-green-900/50 text-green-300 border border-green-700'
+                            u.role === 'admin' ? 'bg-purple-100 text-purple-700 border border-purple-300' :
+                            u.role === 'business_owner' ? 'bg-blue-100 text-blue-700 border border-blue-300' :
+                            'bg-green-100 text-green-700 border border-green-300'
                           }`}>
                             {u.role}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{u.location || '-'}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{u.location || '-'}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                           {u.role === 'freelancer' && u.instagram_id ? (
                             <a 
                               href={`https://instagram.com/${u.instagram_id}`} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-primary-400 hover:text-primary-300 transition-colors"
+                              className="text-primary-500 hover:text-primary-600 transition-colors"
                             >
                               @{u.instagram_id}
                             </a>
                           ) : '-'}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                           {new Date(u.created_at).toLocaleDateString()}
                         </td>
                       </tr>

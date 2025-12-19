@@ -87,10 +87,10 @@ export default function ReelUpload({ reels, onChange, maxReels = 3 }: ReelUpload
   return (
     <div className="space-y-4">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
           Add {maxReels} Sample Reels *
         </label>
-        <p className="text-xs text-gray-500 mb-3">
+        <p className="text-xs text-gray-600 mb-3">
           Share links to your best work! Paste YouTube, Vimeo, Instagram, TikTok, or direct video URLs.
         </p>
       </div>
@@ -101,7 +101,7 @@ export default function ReelUpload({ reels, onChange, maxReels = 3 }: ReelUpload
             {reel ? (
               <div className="relative group">
                 {getEmbedURL(reel) ? (
-                  <div className="w-full h-48 rounded-lg border-2 border-gray-700 overflow-hidden bg-gray-900">
+                  <div className="w-full h-48 rounded-lg border-2 border-gray-300 overflow-hidden bg-gray-100">
                     <iframe
                       src={getEmbedURL(reel) || ''}
                       className="w-full h-full"
@@ -113,7 +113,7 @@ export default function ReelUpload({ reels, onChange, maxReels = 3 }: ReelUpload
                 ) : (
                   <video
                     src={reel}
-                    className="w-full h-48 object-cover rounded-lg border-2 border-gray-700"
+                    className="w-full h-48 object-cover rounded-lg border-2 border-gray-300"
                     controls
                   />
                 )}
@@ -132,17 +132,17 @@ export default function ReelUpload({ reels, onChange, maxReels = 3 }: ReelUpload
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-700 rounded-lg bg-gray-800/50 p-4">
+              <div className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 p-4">
                 <svg className="w-10 h-10 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
-                <p className="mb-2 text-sm text-gray-400 text-center">
+                <p className="mb-2 text-sm text-gray-600 text-center">
                   <span className="font-semibold">Reel {index + 1}</span>
                 </p>
                 <input
                   type="text"
                   placeholder="Paste video URL here..."
-                  className="w-full px-3 py-2 text-sm border border-gray-700 rounded-md bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   value={reel}
                   onChange={(e) => handleURLChange(index, e.target.value)}
                 />
@@ -156,13 +156,13 @@ export default function ReelUpload({ reels, onChange, maxReels = 3 }: ReelUpload
       </div>
       
       {reels.filter(r => r).length < maxReels && (
-        <p className="text-xs text-amber-400">
+        <p className="text-xs text-amber-600">
           Please add all {maxReels} sample reel URLs to complete your profile.
         </p>
       )}
       
-      <div className="mt-4 p-3 bg-blue-900/20 border border-blue-700 rounded-lg">
-        <p className="text-xs text-blue-300">
+      <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <p className="text-xs text-blue-700">
           <strong>💡 Tip:</strong> You can share links from YouTube, Vimeo, Instagram Reels, TikTok, or any direct video URL. 
           Just paste the link in the field above!
         </p>

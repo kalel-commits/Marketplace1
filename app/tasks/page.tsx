@@ -77,11 +77,11 @@ export default function TasksPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-white">Browse Tasks</h1>
-            <div className="text-sm text-gray-400">
+            <h1 className="text-3xl font-bold text-gray-900">Browse Tasks</h1>
+            <div className="text-sm text-gray-600">
               {!loading && `${filteredAndSortedTasks.length} task${filteredAndSortedTasks.length !== 1 ? 's' : ''} found`}
             </div>
           </div>
@@ -90,13 +90,13 @@ export default function TasksPage() {
             <div className="space-y-4">
               {/* Search */}
               <div>
-                <label htmlFor="search" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
                   Search Tasks
                 </label>
                 <input
                   id="search"
                   type="text"
-                  className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   placeholder="Search by title, description, category, or location..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -106,12 +106,12 @@ export default function TasksPage() {
               {/* Filters and Sort */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label htmlFor="category" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
                     Category
                   </label>
                   <select
                     id="category"
-                    className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                     value={filters.category}
                     onChange={(e) => setFilters({ ...filters, category: e.target.value })}
                   >
@@ -124,25 +124,25 @@ export default function TasksPage() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
                     Location
                   </label>
                   <input
                     id="location"
                     type="text"
-                    className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                     placeholder="Filter by location..."
                     value={filters.location}
                     onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label htmlFor="sort" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mb-2">
                     Sort By
                   </label>
                   <select
                     id="sort"
-                    className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                   >
@@ -184,12 +184,12 @@ export default function TasksPage() {
                 >
                   <Card hover className="p-6 h-full">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-semibold text-white line-clamp-2 flex-1 mr-2">
+                      <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 flex-1 mr-2">
                         {task.title}
                       </h3>
                       <StatusBadge status={task.status} type="task" />
                     </div>
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                       {task.description}
                     </p>
                     <div className="flex items-center justify-between text-sm">
@@ -199,7 +199,7 @@ export default function TasksPage() {
                         </span>
                         <span className="text-gray-500">📍 {task.location}</span>
                       </div>
-                      <span className="font-semibold text-primary-400">₹{task.budget.toLocaleString()}</span>
+                      <span className="font-semibold text-primary-500">₹{task.budget.toLocaleString()}</span>
                     </div>
                   </Card>
                 </Link>

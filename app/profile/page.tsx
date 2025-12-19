@@ -95,7 +95,7 @@ export default function ProfilePage() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
         </div>
       </>
@@ -109,20 +109,20 @@ export default function ProfilePage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-white mb-8">My Profile</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">My Profile</h1>
 
           <Card className="p-6">
             <div className="mb-6">
               <div className="flex items-center space-x-4 mb-4">
-                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                <div className="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                   {user.full_name?.charAt(0).toUpperCase() || 'U'}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-white">{user.full_name}</h2>
-                  <p className="text-gray-400">{user.email}</p>
-                  <span className="inline-block mt-1 px-3 py-1 text-xs font-medium bg-primary-900/50 text-primary-300 rounded-full border border-primary-700">
+                  <h2 className="text-xl font-bold text-gray-900">{user.full_name}</h2>
+                  <p className="text-gray-600">{user.email}</p>
+                  <span className="inline-block mt-1 px-3 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded-full border border-primary-300">
                     {user.role === 'admin' ? 'Admin' : user.role === 'business_owner' ? 'Business Owner' : 'Freelancer'}
                   </span>
                 </div>
@@ -131,27 +131,27 @@ export default function ProfilePage() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="full_name" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="full_name" className="block text-sm font-medium text-gray-700 mb-2">
                   Full Name *
                 </label>
                 <input
                   type="text"
                   id="full_name"
                   required
-                  className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   value={formData.full_name}
                   onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                   Phone Number (for WhatsApp)
                 </label>
                 <input
                   type="tel"
                   id="phone"
-                  className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   placeholder="+91 9876543210"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -162,13 +162,13 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
                   Location
                 </label>
                 <input
                   type="text"
                   id="location"
-                  className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   placeholder="e.g., Mumbai, Maharashtra"
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
@@ -177,14 +177,14 @@ export default function ProfilePage() {
 
               {user.role === 'freelancer' && (
                 <div>
-                  <label htmlFor="instagram_id" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="instagram_id" className="block text-sm font-medium text-gray-700 mb-2">
                     Instagram ID *
                   </label>
                   <input
                     type="text"
                     id="instagram_id"
                     required
-                    className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                    className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                     placeholder="your_instagram_handle"
                     value={formData.instagram_id}
                     onChange={(e) => setFormData({ ...formData, instagram_id: e.target.value })}
@@ -204,13 +204,13 @@ export default function ProfilePage() {
               )}
 
               <div>
-                <label htmlFor="bio" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
                   Bio
                 </label>
                 <textarea
                   id="bio"
                   rows={4}
-                  className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                  className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                   placeholder="Tell us about yourself..."
                   value={formData.bio}
                   onChange={(e) => setFormData({ ...formData, bio: e.target.value })}

@@ -101,21 +101,21 @@ export default function SignupPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-black py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full">
           <Card className="p-8">
             <div className="mb-8">
-              <h2 className="text-center text-3xl font-extrabold text-white">
+              <h2 className="text-center text-3xl font-extrabold text-gray-900">
                 Create your account
               </h2>
-              <p className="mt-2 text-center text-sm text-gray-400">
+              <p className="mt-2 text-center text-sm text-gray-600">
                 Choose your role to get started
               </p>
             </div>
             <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-300">
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
                   Full Name
                 </label>
                 <input
@@ -123,14 +123,14 @@ export default function SignupPage() {
                   name="fullName"
                   type="text"
                   required
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 bg-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                   placeholder="John Doe"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
                 </label>
                 <input
@@ -139,14 +139,14 @@ export default function SignupPage() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 bg-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                   placeholder="email@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
                 <input
@@ -155,7 +155,7 @@ export default function SignupPage() {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 bg-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -164,7 +164,7 @@ export default function SignupPage() {
               {role === 'freelancer' && (
                 <>
                   <div>
-                    <label htmlFor="instagramId" className="block text-sm font-medium text-gray-300">
+                    <label htmlFor="instagramId" className="block text-sm font-medium text-gray-700">
                       Instagram ID *
                     </label>
                     <input
@@ -172,7 +172,7 @@ export default function SignupPage() {
                       name="instagramId"
                       type="text"
                       required
-                      className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 bg-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                       placeholder="your_instagram_handle"
                       value={instagramId}
                       onChange={(e) => setInstagramId(e.target.value)}
@@ -189,7 +189,7 @@ export default function SignupPage() {
                 </>
               )}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   I am a...
                 </label>
                 <div className="grid grid-cols-2 gap-4">
@@ -198,12 +198,12 @@ export default function SignupPage() {
                     onClick={() => setRole('business_owner')}
                     className={`p-4 border-2 rounded-lg text-center transition-colors ${
                       role === 'business_owner'
-                        ? 'border-primary-500 bg-primary-900/30 text-primary-300'
-                        : 'border-gray-700 hover:border-primary-600 text-white bg-gray-800'
+                        ? 'border-primary-500 bg-primary-50 text-primary-700'
+                        : 'border-gray-300 hover:border-primary-400 text-gray-700 bg-white'
                     }`}
                   >
                     <div className="font-semibold">Business Owner</div>
-                    <div className="text-xs text-gray-400 mt-1">
+                    <div className="text-xs text-gray-500 mt-1">
                       Post tasks and find freelancers
                     </div>
                   </button>
@@ -212,12 +212,12 @@ export default function SignupPage() {
                     onClick={() => setRole('freelancer')}
                     className={`p-4 border-2 rounded-lg text-center transition-colors ${
                       role === 'freelancer'
-                        ? 'border-primary-500 bg-primary-900/30 text-primary-300'
-                        : 'border-gray-700 hover:border-primary-600 text-white bg-gray-800'
+                        ? 'border-primary-500 bg-primary-50 text-primary-700'
+                        : 'border-gray-300 hover:border-primary-400 text-gray-700 bg-white'
                     }`}
                   >
                     <div className="font-semibold">Freelancer</div>
-                    <div className="text-xs text-gray-400 mt-1">
+                    <div className="text-xs text-gray-500 mt-1">
                       Browse and apply to tasks
                     </div>
                   </button>
@@ -238,7 +238,7 @@ export default function SignupPage() {
               <div className="text-center">
                 <Link
                   href="/login"
-                  className="text-primary-400 hover:text-primary-300 transition-colors"
+                  className="text-primary-500 hover:text-primary-600 transition-colors"
                 >
                   Already have an account? Sign in
                 </Link>

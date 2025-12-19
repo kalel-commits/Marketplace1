@@ -146,7 +146,7 @@ export default function TaskDetailsPage() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
         </div>
       </>
@@ -157,8 +157,8 @@ export default function TaskDetailsPage() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen flex items-center justify-center bg-black">
-          <p className="text-gray-400">Task not found</p>
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <p className="text-gray-600">Task not found</p>
         </div>
       </>
     )
@@ -190,11 +190,11 @@ export default function TaskDetailsPage() {
         }}
         onCancel={() => setConfirmDialog({ isOpen: false, action: null, applicationId: null })}
       />
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/tasks"
-            className="text-primary-400 hover:text-primary-300 mb-4 inline-block transition-colors"
+            className="text-primary-500 hover:text-primary-600 mb-4 inline-block transition-colors"
           >
             ← Back to tasks
           </Link>
@@ -203,32 +203,32 @@ export default function TaskDetailsPage() {
             <div className="flex justify-between items-start mb-4">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <h1 className="text-3xl font-bold text-white">{task.title}</h1>
+                  <h1 className="text-3xl font-bold text-gray-900">{task.title}</h1>
                   <StatusBadge status={task.status} type="task" />
                 </div>
-                <div className="flex items-center flex-wrap gap-4 text-sm text-gray-400">
-                  <span className="px-3 py-1 bg-primary-900/50 text-primary-300 rounded-full font-medium border border-primary-700">
+                <div className="flex items-center flex-wrap gap-4 text-sm text-gray-600">
+                  <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full font-medium border border-primary-300">
                     {task.category}
                   </span>
                   <span>📍 {task.location}</span>
-                  <span className="font-semibold text-primary-400">₹{task.budget.toLocaleString()}</span>
+                  <span className="font-semibold text-primary-500">₹{task.budget.toLocaleString()}</span>
                 </div>
               </div>
             </div>
 
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-white mb-2">Description</h2>
-              <p className="text-gray-300 whitespace-pre-wrap">{task.description}</p>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Description</h2>
+              <p className="text-gray-700 whitespace-pre-wrap">{task.description}</p>
             </div>
 
             {task.business_owner && (
-              <div className="border-t border-gray-800 pt-4">
-                <h3 className="text-sm font-medium text-gray-300 mb-2">Posted by</h3>
+              <div className="border-t border-gray-200 pt-4">
+                <h3 className="text-sm font-medium text-gray-700 mb-2">Posted by</h3>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-white">{task.business_owner.full_name}</p>
+                    <p className="font-medium text-gray-900">{task.business_owner.full_name}</p>
                     {task.business_owner.location && (
-                      <p className="text-sm text-gray-400">📍 {task.business_owner.location}</p>
+                      <p className="text-sm text-gray-600">📍 {task.business_owner.location}</p>
                     )}
                   </div>
                   {task.business_owner.phone && (
@@ -245,10 +245,10 @@ export default function TaskDetailsPage() {
             )}
 
             {hasApplied && (
-              <div className="mt-6 pt-6 border-t border-gray-800">
-                <div className="bg-blue-900/20 border border-blue-700 rounded-lg p-4">
-                  <p className="text-blue-300 font-medium mb-2">You've already applied to this task</p>
-                  <div className="text-sm text-gray-300 space-y-1">
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-blue-700 font-medium mb-2">You've already applied to this task</p>
+                  <div className="text-sm text-gray-700 space-y-1">
                     <p><strong>Your Proposal:</strong> {userApplication?.proposal}</p>
                     <p><strong>Your Proposed Price:</strong> ₹{userApplication?.proposed_price.toLocaleString()}</p>
                     <div className="mt-2">
@@ -260,7 +260,7 @@ export default function TaskDetailsPage() {
             )}
 
             {canApply && (
-              <div className="mt-6 pt-6 border-t border-gray-800">
+              <div className="mt-6 pt-6 border-t border-gray-200">
                 {!showApplyForm ? (
                   <Button
                     onClick={() => setShowApplyForm(true)}
@@ -271,7 +271,7 @@ export default function TaskDetailsPage() {
                 ) : (
                   <form onSubmit={handleApply} className="space-y-4">
                     <div>
-                      <label htmlFor="proposal" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="proposal" className="block text-sm font-medium text-gray-700 mb-2">
                         Your Proposal *
                       </label>
                       <textarea
@@ -279,7 +279,7 @@ export default function TaskDetailsPage() {
                         required
                         rows={4}
                         minLength={20}
-                        className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                         placeholder="Explain why you're the right fit for this task (minimum 20 characters)..."
                         value={proposal}
                         onChange={(e) => setProposal(e.target.value)}
@@ -287,7 +287,7 @@ export default function TaskDetailsPage() {
                       <p className="text-xs text-gray-500 mt-1">{proposal.length}/20 characters minimum</p>
                     </div>
                     <div>
-                      <label htmlFor="proposedPrice" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="proposedPrice" className="block text-sm font-medium text-gray-700 mb-2">
                         Your Proposed Price (₹) *
                       </label>
                       <input
@@ -296,7 +296,7 @@ export default function TaskDetailsPage() {
                         required
                         min="1"
                         step="0.01"
-                        className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
                         placeholder="5000"
                         value={proposedPrice}
                         onChange={(e) => setProposedPrice(e.target.value)}
@@ -331,33 +331,33 @@ export default function TaskDetailsPage() {
 
           {isOwner && (
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-white mb-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
                 Applications ({applicationsList.length})
               </h2>
               {applicationsList.length === 0 ? (
-                <p className="text-gray-400 text-center py-8">
+                <p className="text-gray-600 text-center py-8">
                   No applications yet. Applications will appear here when freelancers apply to this task.
                 </p>
               ) : (
                 <div className="space-y-4">
                   {applicationsList.map((app) => (
-                    <div key={app.id} className="border border-gray-800 rounded-lg p-4 bg-gray-800/50">
+                    <div key={app.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <p className="font-medium text-white">
+                          <p className="font-medium text-gray-900">
                             {app.freelancer?.full_name || 'Unknown'}
                           </p>
                           {app.freelancer?.location && (
-                            <p className="text-sm text-gray-400">📍 {app.freelancer.location}</p>
+                            <p className="text-sm text-gray-600">📍 {app.freelancer.location}</p>
                           )}
                           {app.freelancer?.instagram_id && (
-                            <p className="text-sm text-gray-400 mt-1">
+                            <p className="text-sm text-gray-600 mt-1">
                               📷{' '}
                               <a 
                                 href={`https://instagram.com/${app.freelancer.instagram_id}`} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="text-primary-400 hover:text-primary-300 transition-colors"
+                                className="text-primary-500 hover:text-primary-600 transition-colors"
                               >
                                 @{app.freelancer.instagram_id}
                               </a>
@@ -365,11 +365,11 @@ export default function TaskDetailsPage() {
                           )}
                         </div>
                         <div className="text-right">
-                          <p className="font-semibold text-primary-400">₹{app.proposed_price.toLocaleString()}</p>
+                          <p className="font-semibold text-primary-500">₹{app.proposed_price.toLocaleString()}</p>
                           <StatusBadge status={app.status} type="application" />
                         </div>
                       </div>
-                      <p className="text-gray-300 mb-3">{app.proposal}</p>
+                      <p className="text-gray-700 mb-3">{app.proposal}</p>
                       
                       {/* Display Freelancer Reels */}
                       {app.freelancer?.sample_reels && app.freelancer.sample_reels.length > 0 && (
