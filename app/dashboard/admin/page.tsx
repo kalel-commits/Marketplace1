@@ -38,6 +38,11 @@ export default function AdminDashboard() {
       }
       setUser(currentUser)
 
+      // Check if Firebase is initialized
+      if (!db) {
+        throw new Error('Firebase not initialized')
+      }
+
       // Load all users
       const usersSnapshot = await getDocs(collection(db, 'users'))
       const usersList: User[] = []
