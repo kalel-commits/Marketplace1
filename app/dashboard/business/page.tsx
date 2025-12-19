@@ -51,6 +51,12 @@ export default function BusinessDashboard() {
     }
   }
 
+  // Calculate stats
+  const openTasks = myTasks.filter(t => t.status === 'open').length
+  const inProgressTasks = myTasks.filter(t => t.status === 'in_progress').length
+  const completedTasks = myTasks.filter(t => t.status === 'completed').length
+  const pendingApplications = recentApplications.filter(a => a.status === 'pending').length
+
   if (loading) {
     return (
       <>
@@ -75,11 +81,6 @@ export default function BusinessDashboard() {
       </>
     )
   }
-
-  const openTasks = myTasks.filter(t => t.status === 'open').length
-  const inProgressTasks = myTasks.filter(t => t.status === 'in_progress').length
-  const completedTasks = myTasks.filter(t => t.status === 'completed').length
-  const pendingApplications = recentApplications.filter(a => a.status === 'pending').length
 
   return (
     <>

@@ -9,7 +9,7 @@ import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { auth as firebaseAuth, db, User, UserRole } from './firebase'
 
 export const authUtils = {
-  async signUp(email: string, password: string, fullName: string, role: UserRole) {
+  async signUp(email: string, password: string, fullName: string, role: UserRole, instagramId?: string) {
     if (!firebaseAuth || !db) throw new Error('Firebase not initialized')
     
     try {
@@ -24,6 +24,7 @@ export const authUtils = {
         phone: '',
         location: '',
         bio: '',
+        ...(instagramId && { instagram_id: instagramId }),
         created_at: serverTimestamp(),
       })
 

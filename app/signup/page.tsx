@@ -15,6 +15,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
   const [role, setRole] = useState<UserRole | ''>('')
+  const [instagramId, setInstagramId] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -52,10 +53,21 @@ export default function SignupPage() {
       return
     }
 
+    if (role === 'freelancer' && !instagramId.trim()) {
+      toast.error('Please enter your Instagram ID')
+      return
+    }
+
+    // Validate Instagram ID format (basic validation)
+    if (role === 'freelancer' && instagramId.trim() && !/^[a-zA-Z0-9._]+$/.test(instagramId.trim())) {
+      toast.error('Instagram ID can only contain letters, numbers, dots, and underscores')
+      return
+    }
+
     setLoading(true)
 
     try {
-      await auth.signUp(email.trim(), password, fullName.trim(), role as UserRole)
+      await auth.signUp(email.trim(), password, fullName.trim(), role as UserRole, instagramId.trim())
       toast.success('Account created successfully!')
       
       // Sign in after signup
@@ -137,6 +149,26 @@ export default function SignupPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              {role === 'freelancer' && (
+                <div>
+                  <label htmlFor="instagramId" className="block text-sm font-medium text-gray-300">
+                    Instagram ID *
+                  </label>
+                  <input
+                    id="instagramId"
+                    name="instagramId"
+                    type="text"
+                    required
+                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    placeholder="your_instagram_handle"
+                    value={instagramId}
+                    onChange={(e) => setInstagramId(e.target.value)}
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Your Instagram username (without @)
+                  </p>
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   I am a...

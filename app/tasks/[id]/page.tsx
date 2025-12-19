@@ -349,6 +349,19 @@ export default function TaskDetailsPage() {
                           {app.freelancer?.location && (
                             <p className="text-sm text-gray-400">📍 {app.freelancer.location}</p>
                           )}
+                          {app.freelancer?.instagram_id && (
+                            <p className="text-sm text-gray-400 mt-1">
+                              📷{' '}
+                              <a 
+                                href={`https://instagram.com/${app.freelancer.instagram_id}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-primary-400 hover:text-primary-300 transition-colors"
+                              >
+                                @{app.freelancer.instagram_id}
+                              </a>
+                            </p>
+                          )}
                         </div>
                         <div className="text-right">
                           <p className="font-semibold text-primary-400">₹{app.proposed_price.toLocaleString()}</p>

@@ -70,6 +70,7 @@ export interface User {
   phone?: string
   location?: string
   bio?: string
+  instagram_id?: string
   created_at: string
 }
 

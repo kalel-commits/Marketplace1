@@ -7,6 +7,8 @@ import { db } from '@/lib/firebase'
 import { doc, updateDoc } from 'firebase/firestore'
 import toast from 'react-hot-toast'
 import Navbar from '@/components/Navbar'
+import Button from '@/components/ui/Button'
+import Card from '@/components/ui/Card'
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null)
@@ -17,6 +19,7 @@ export default function ProfilePage() {
     phone: '',
     location: '',
     bio: '',
+    instagram_id: '',
   })
   const router = useRouter()
 
@@ -38,6 +41,7 @@ export default function ProfilePage() {
         phone: currentUser.phone || '',
         location: currentUser.location || '',
         bio: currentUser.bio || '',
+        instagram_id: currentUser.instagram_id || '',
       })
     } catch (error) {
       console.error('Failed to load profile:', error)
@@ -84,7 +88,7 @@ export default function ProfilePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-white mb-8">My Profile</h1>
 
-          <div className="bg-gray-900 shadow-lg rounded-lg border border-gray-800 p-6">
+          <Card className="p-6">
             <div className="mb-6">
               <div className="flex items-center space-x-4 mb-4">
                 <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
@@ -146,6 +150,26 @@ export default function ProfilePage() {
                 />
               </div>
 
+              {user.role === 'freelancer' && (
+                <div>
+                  <label htmlFor="instagram_id" className="block text-sm font-medium text-gray-300 mb-2">
+                    Instagram ID *
+                  </label>
+                  <input
+                    type="text"
+                    id="instagram_id"
+                    required
+                    className="w-full rounded-md border-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-gray-800 text-white"
+                    placeholder="your_instagram_handle"
+                    value={formData.instagram_id}
+                    onChange={(e) => setFormData({ ...formData, instagram_id: e.target.value })}
+                  />
+                  <p className="mt-1 text-xs text-gray-500">
+                    Your Instagram username (without @)
+                  </p>
+                </div>
+              )}
+
               <div>
                 <label htmlFor="bio" className="block text-sm font-medium text-gray-300 mb-2">
                   Bio
@@ -161,16 +185,15 @@ export default function ProfilePage() {
               </div>
 
               <div className="flex justify-end">
-                <button
+                <Button
                   type="submit"
-                  disabled={saving}
-                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-500 disabled:opacity-50 transition-colors"
+                  isLoading={saving}
                 >
-                  {saving ? 'Saving...' : 'Save Changes'}
-                </button>
+                  Save Changes
+                </Button>
               </div>
             </form>
-          </div>
+          </Card>
         </div>
       </div>
     </>
