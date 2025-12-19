@@ -1,16 +1,18 @@
-# NearCut MVP
+# Prolance - Connecting Talent & Projects
 
-A minimal MVP for connecting local small businesses with nearby freelancers for digital services.
+A professional marketplace connecting businesses with skilled video editors. Business owners can review freelancer sample reels before choosing the perfect editor for their projects.
 
 ## Features
 
 - **Two-Role System**: Business Owners and Freelancers
+- **Sample Reels**: Freelancers upload 3 sample reels showcasing their work
+- **Reel Preview**: Business owners can watch freelancer reels when reviewing applications
 - **Authentication**: Email/password with role selection
 - **Task Management**: Business owners can post tasks with title, description, category, budget, and location
 - **Application System**: Freelancers can browse tasks and apply with proposals and prices
 - **Dashboards**: Role-specific dashboards showing relevant information
-- **WhatsApp Integration**: Simple contact via WhatsApp button (no full chat system)
-- **User Profiles**: Simple profile management
+- **WhatsApp Integration**: Simple contact via WhatsApp button
+- **User Profiles**: Complete profile management with reel uploads
 
 ## Tech Stack
 

@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import Navbar from '@/components/Navbar'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
+import ReelUpload from '@/components/ReelUpload'
 
 export default function SignupPage() {
   const [email, setEmail] = useState('')
@@ -16,6 +17,7 @@ export default function SignupPage() {
   const [fullName, setFullName] = useState('')
   const [role, setRole] = useState<UserRole | ''>('')
   const [instagramId, setInstagramId] = useState('')
+  const [sampleReels, setSampleReels] = useState<string[]>(['', '', ''])
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -64,10 +66,20 @@ export default function SignupPage() {
       return
     }
 
+    // Validate reels for freelancers
+    if (role === 'freelancer') {
+      const uploadedReels = sampleReels.filter(r => r && r.trim() !== '')
+      if (uploadedReels.length < 3) {
+        toast.error('Please upload all 3 sample reels to showcase your work')
+        return
+      }
+    }
+
     setLoading(true)
 
     try {
-      await auth.signUp(email.trim(), password, fullName.trim(), role as UserRole, instagramId.trim())
+      const reels = role === 'freelancer' ? sampleReels.filter(r => r && r.trim() !== '') : undefined
+      await auth.signUp(email.trim(), password, fullName.trim(), role as UserRole, instagramId.trim(), reels)
       toast.success('Account created successfully!')
       
       // Sign in after signup
@@ -150,24 +162,31 @@ export default function SignupPage() {
                 />
               </div>
               {role === 'freelancer' && (
-                <div>
-                  <label htmlFor="instagramId" className="block text-sm font-medium text-gray-300">
-                    Instagram ID *
-                  </label>
-                  <input
-                    id="instagramId"
-                    name="instagramId"
-                    type="text"
-                    required
-                    className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                    placeholder="your_instagram_handle"
-                    value={instagramId}
-                    onChange={(e) => setInstagramId(e.target.value)}
+                <>
+                  <div>
+                    <label htmlFor="instagramId" className="block text-sm font-medium text-gray-300">
+                      Instagram ID *
+                    </label>
+                    <input
+                      id="instagramId"
+                      name="instagramId"
+                      type="text"
+                      required
+                      className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-400 text-white bg-gray-800 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      placeholder="your_instagram_handle"
+                      value={instagramId}
+                      onChange={(e) => setInstagramId(e.target.value)}
+                    />
+                    <p className="mt-1 text-xs text-gray-500">
+                      Your Instagram username (without @)
+                    </p>
+                  </div>
+                  <ReelUpload 
+                    reels={sampleReels} 
+                    onChange={setSampleReels}
+                    maxReels={3}
                   />
-                  <p className="mt-1 text-xs text-gray-500">
-                    Your Instagram username (without @)
-                  </p>
-                </div>
+                </>
               )}
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">

@@ -13,6 +13,7 @@ import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import StatusBadge from '@/components/ui/StatusBadge'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
+import FreelancerReels from '@/components/FreelancerReels'
 
 export default function TaskDetailsPage() {
   const params = useParams()
@@ -369,7 +370,16 @@ export default function TaskDetailsPage() {
                         </div>
                       </div>
                       <p className="text-gray-300 mb-3">{app.proposal}</p>
-                      <div className="flex items-center space-x-2">
+                      
+                      {/* Display Freelancer Reels */}
+                      {app.freelancer?.sample_reels && app.freelancer.sample_reels.length > 0 && (
+                        <FreelancerReels 
+                          reels={app.freelancer.sample_reels} 
+                          freelancerName={app.freelancer.full_name}
+                        />
+                      )}
+                      
+                      <div className="flex items-center space-x-2 mt-4">
                         {app.freelancer?.phone && (
                           <Button
                             size="sm"

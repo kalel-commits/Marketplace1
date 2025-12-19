@@ -40,11 +40,19 @@ export default function LoginPage() {
       } else if (user?.role === 'business_owner') {
         router.push('/dashboard/business')
       } else if (user?.role === 'freelancer') {
-        router.push('/dashboard/freelancer')
+        // Check if freelancer has uploaded reels
+        if (!user.sample_reels || user.sample_reels.length < 3) {
+          toast.error('Please upload 3 sample reels to complete your profile')
+          router.push('/profile')
+        } else {
+          router.push('/dashboard/freelancer')
+        }
       } else {
         router.push('/')
       }
-      toast.success('Logged in successfully!')
+      if (user?.role !== 'freelancer' || (user.sample_reels && user.sample_reels.length >= 3)) {
+        toast.success('Logged in successfully!')
+      }
     } catch (error: any) {
       toast.error(error.message || 'Failed to login')
     } finally {

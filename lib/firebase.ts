@@ -1,6 +1,7 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app'
 import { getAuth, Auth } from 'firebase/auth'
 import { getFirestore, Firestore } from 'firebase/firestore'
+import { getStorage, FirebaseStorage } from 'firebase/storage'
 
 // Firebase configuration - replace with your actual config from Firebase Console
 const firebaseConfig = {
@@ -32,6 +33,7 @@ if (typeof window !== 'undefined' && (!firebaseConfig.apiKey || firebaseConfig.a
 let app: FirebaseApp | undefined
 let auth: Auth | undefined
 let db: Firestore | undefined
+let storage: FirebaseStorage | undefined
 
 if (typeof window !== 'undefined') {
   // Only initialize if we have a valid API key
@@ -44,6 +46,7 @@ if (typeof window !== 'undefined') {
       }
       auth = getAuth(app)
       db = getFirestore(app)
+      storage = getStorage(app)
     } catch (error) {
       console.error('❌ Firebase initialization error:', error)
       console.error('Please check:')
@@ -57,7 +60,7 @@ if (typeof window !== 'undefined') {
 }
 
 // Export with type assertions - these will only be used client-side
-export { auth, db }
+export { auth, db, storage }
 
 // Types
 export type UserRole = 'business_owner' | 'freelancer' | 'admin'
@@ -71,6 +74,7 @@ export interface User {
   location?: string
   bio?: string
   instagram_id?: string
+  sample_reels?: string[] // Array of video URLs for freelancers
   created_at: string
 }
 

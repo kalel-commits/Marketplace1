@@ -12,7 +12,7 @@ import { auth as firebaseAuth, db, User, UserRole } from './firebase'
 export type { User, UserRole }
 
 export const authUtils = {
-  async signUp(email: string, password: string, fullName: string, role: UserRole, instagramId?: string) {
+  async signUp(email: string, password: string, fullName: string, role: UserRole, instagramId?: string, sampleReels?: string[]) {
     if (!firebaseAuth || !db) throw new Error('Firebase not initialized')
     
     try {
@@ -28,11 +28,17 @@ export const authUtils = {
         location: '',
         bio: '',
         ...(instagramId && { instagram_id: instagramId }),
+        ...(role === 'freelancer' && sampleReels && sampleReels.filter(r => r).length > 0 && { sample_reels: sampleReels.filter(r => r) }),
         created_at: serverTimestamp(),
       })
 
       return userCredential
     } catch (error: any) {
+      // Log the full error for debugging
+      console.error('Firebase Auth Error:', error)
+      console.error('Error Code:', error.code)
+      console.error('Error Message:', error.message)
+      
       // Provide more helpful error messages
       if (error.code === 'auth/operation-not-allowed') {
         throw new Error('Email/Password authentication is not enabled. Please enable it in Firebase Console > Authentication > Sign-in method')
@@ -44,9 +50,11 @@ export const authUtils = {
         throw new Error('Invalid email address')
       } else if (error.code === 'auth/network-request-failed') {
         throw new Error('Network error. Please check your internet connection')
+      } else if (error.code === 'auth/api-key-not-valid') {
+        throw new Error('API key is not valid. Please check your .env.local file and ensure the Identity Toolkit API is enabled in Google Cloud Console.')
       }
       // Re-throw with original message for other errors
-      throw error
+      throw new Error(error.message || `Authentication failed: ${error.code || 'Unknown error'}`)
     }
   },
 
@@ -111,4 +119,4 @@ export const authUtils = {
 }
 
 // Keep the old export name for compatibility
-export const auth = authUtils
+export const auth = authUtils  

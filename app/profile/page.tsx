@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import Navbar from '@/components/Navbar'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
+import ReelUpload from '@/components/ReelUpload'
 
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null)
@@ -21,6 +22,7 @@ export default function ProfilePage() {
     bio: '',
     instagram_id: '',
   })
+  const [sampleReels, setSampleReels] = useState<string[]>(['', '', ''])
   const router = useRouter()
 
   useEffect(() => {
@@ -43,6 +45,16 @@ export default function ProfilePage() {
         bio: currentUser.bio || '',
         instagram_id: currentUser.instagram_id || '',
       })
+      // Initialize reels array
+      if (currentUser.sample_reels && currentUser.sample_reels.length > 0) {
+        const reels = [...currentUser.sample_reels]
+        while (reels.length < 3) {
+          reels.push('')
+        }
+        setSampleReels(reels.slice(0, 3))
+      } else {
+        setSampleReels(['', '', ''])
+      }
     } catch (error) {
       console.error('Failed to load profile:', error)
     } finally {
@@ -54,9 +66,22 @@ export default function ProfilePage() {
     e.preventDefault()
     if (!user || !db) return
 
+    // Validate reels for freelancers
+    if (user.role === 'freelancer') {
+      const uploadedReels = sampleReels.filter(r => r && r.trim() !== '')
+      if (uploadedReels.length < 3) {
+        toast.error('Please upload all 3 sample reels to complete your profile')
+        return
+      }
+    }
+
     setSaving(true)
     try {
-      await updateDoc(doc(db, 'users', user.id), formData)
+      const updateData: any = { ...formData }
+      if (user.role === 'freelancer') {
+        updateData.sample_reels = sampleReels.filter(r => r && r.trim() !== '')
+      }
+      await updateDoc(doc(db, 'users', user.id), updateData)
       toast.success('Profile updated successfully!')
       await loadProfile()
     } catch (error: any) {
@@ -168,6 +193,14 @@ export default function ProfilePage() {
                     Your Instagram username (without @)
                   </p>
                 </div>
+              )}
+
+              {user.role === 'freelancer' && (
+                <ReelUpload 
+                  reels={sampleReels} 
+                  onChange={setSampleReels}
+                  maxReels={3}
+                />
               )}
 
               <div>
