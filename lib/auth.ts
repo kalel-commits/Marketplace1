@@ -8,6 +8,9 @@ import {
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { auth as firebaseAuth, db, User, UserRole } from './firebase'
 
+// Re-export User and UserRole for convenience
+export type { User, UserRole }
+
 export const authUtils = {
   async signUp(email: string, password: string, fullName: string, role: UserRole, instagramId?: string) {
     if (!firebaseAuth || !db) throw new Error('Firebase not initialized')
@@ -61,8 +64,12 @@ export const authUtils = {
   async getCurrentUser(): Promise<User | null> {
     if (!firebaseAuth || !db) return null
     
+    // Store references to avoid TypeScript issues with undefined
+    const authInstance = firebaseAuth
+    const dbInstance = db
+    
     return new Promise((resolve) => {
-      const unsubscribe = onAuthStateChanged(firebaseAuth, async (firebaseUser) => {
+      const unsubscribe = onAuthStateChanged(authInstance, async (firebaseUser) => {
         unsubscribe()
         if (!firebaseUser) {
           resolve(null)
@@ -70,7 +77,7 @@ export const authUtils = {
         }
 
         try {
-          const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid))
+          const userDoc = await getDoc(doc(dbInstance, 'users', firebaseUser.uid))
           if (userDoc.exists()) {
             resolve({
               id: firebaseUser.uid,
@@ -91,8 +98,11 @@ export const authUtils = {
   async getSession() {
     if (!firebaseAuth) return null
     
+    // Store reference to avoid TypeScript issues with undefined
+    const authInstance = firebaseAuth
+    
     return new Promise((resolve) => {
-      const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
+      const unsubscribe = onAuthStateChanged(authInstance, (user) => {
         unsubscribe()
         resolve(user ? { user } : null)
       })
