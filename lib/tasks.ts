@@ -12,6 +12,9 @@ import {
 } from 'firebase/firestore'
 import { db, Task, Application, User } from './firebase'
 
+// Re-export types for convenience
+export type { Task, Application, User }
+
 export const tasks = {
   async createTask(data: {
     title: string
@@ -285,6 +288,10 @@ export const applications = {
     })
 
     const appDoc = await getDoc(doc(db, 'applications', id))
+    if (!appDoc.exists()) {
+      throw new Error('Application not found')
+    }
+    
     const appData = appDoc.data()
 
     return {
