@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { auth, User } from '@/lib/auth'
-import { tasks, Task } from '@/lib/tasks'
-import { applications, Application } from '@/lib/tasks'
+import { auth } from '@/lib/auth'
+import { User, Task, Application } from '@/lib/firebase'
+import { tasks } from '@/lib/tasks'
+import { applications } from '@/lib/tasks'
 import Navbar from '@/components/Navbar'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
@@ -20,11 +21,7 @@ export default function BusinessDashboard() {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setLoading(true)
     try {
       const currentUser = await auth.getCurrentUser()
@@ -49,13 +46,20 @@ export default function BusinessDashboard() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [router])
 
-  // Calculate stats
-  const openTasks = myTasks.filter(t => t.status === 'open').length
-  const inProgressTasks = myTasks.filter(t => t.status === 'in_progress').length
-  const completedTasks = myTasks.filter(t => t.status === 'completed').length
-  const pendingApplications = recentApplications.filter(a => a.status === 'pending').length
+  useEffect(() => {
+    loadData()
+  }, [loadData])
+
+  const stats = useMemo(() => {
+    return {
+      openTasks: myTasks.filter(t => t.status === 'open').length,
+      inProgressTasks: myTasks.filter(t => t.status === 'in_progress').length,
+      completedTasks: myTasks.filter(t => t.status === 'completed').length,
+      pendingApplications: recentApplications.filter(a => a.status === 'pending').length,
+    }
+  }, [myTasks, recentApplications])
 
   if (loading) {
     return (
@@ -97,19 +101,19 @@ export default function BusinessDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <Card className="p-6">
               <div className="text-sm font-medium text-gray-400">Open Tasks</div>
-              <div className="mt-2 text-3xl font-bold text-primary-400">{openTasks}</div>
+              <div className="mt-2 text-3xl font-bold text-primary-400">{stats.openTasks}</div>
             </Card>
             <Card className="p-6">
               <div className="text-sm font-medium text-gray-400">In Progress</div>
-              <div className="mt-2 text-3xl font-bold text-blue-400">{inProgressTasks}</div>
+              <div className="mt-2 text-3xl font-bold text-blue-400">{stats.inProgressTasks}</div>
             </Card>
             <Card className="p-6">
               <div className="text-sm font-medium text-gray-400">Completed</div>
-              <div className="mt-2 text-3xl font-bold text-green-400">{completedTasks}</div>
+              <div className="mt-2 text-3xl font-bold text-green-400">{stats.completedTasks}</div>
             </Card>
             <Card className="p-6">
               <div className="text-sm font-medium text-gray-400">Pending Applications</div>
-              <div className="mt-2 text-3xl font-bold text-yellow-400">{pendingApplications}</div>
+              <div className="mt-2 text-3xl font-bold text-yellow-400">{stats.pendingApplications}</div>
             </Card>
           </div>
 
@@ -165,7 +169,7 @@ export default function BusinessDashboard() {
                   )}
                 </div>
               )}
-            </div>
+            </Card>
 
             <Card className="p-6">
               <h2 className="text-xl font-bold text-white mb-4">Recent Applications</h2>
@@ -208,4 +212,3 @@ export default function BusinessDashboard() {
     </>
   )
 }
-
