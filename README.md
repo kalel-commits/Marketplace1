@@ -1,4 +1,4 @@
-# Prolance - Connecting Talent & Projects
+# Skilvo - Connecting Talent & Projects
 
 A professional marketplace connecting businesses with skilled video editors. Business owners can review freelancer sample reels before choosing the perfect editor for their projects.
 

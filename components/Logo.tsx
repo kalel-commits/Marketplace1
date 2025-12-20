@@ -25,7 +25,7 @@ export default function Logo({ className = '', showTagline = false, size = 'md' 
       {/* Brand Name */}
       <div className="flex flex-col">
         <span className={`${sizeClasses[size]} font-bold text-gray-900 group-hover:text-primary-500 transition-colors`}>
-          Prolance
+          Skilvo
         </span>
         {showTagline && (
           <span className="text-xs text-gray-600 font-normal">

@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Prolance - Connecting Talent & Projects',
+  title: 'Skilvo - Connecting Talent & Projects',
   description: 'Connect local businesses with nearby freelancers',
 }
 
