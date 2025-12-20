@@ -10,7 +10,7 @@ import {
   updateDoc,
   Timestamp,
 } from 'firebase/firestore'
-import { db, Task, Application, User } from './firebase'
+import { db, Task, Application, User, Notification } from './firebase'
 
 // Re-export types for convenience
 export type { Task, Application, User }
@@ -36,12 +36,40 @@ export const tasks = {
     const docRef = await addDoc(collection(db, 'tasks'), taskData)
     const taskDoc = await getDoc(docRef)
     
-    return {
+    const newTask = {
       id: docRef.id,
       ...taskData,
       created_at: taskData.created_at.toDate().toISOString(),
       updated_at: taskData.updated_at.toDate().toISOString(),
     } as Task
+
+    // Notify all freelancers about the new task
+    try {
+      const freelancersSnapshot = await getDocs(
+        query(collection(db, 'users'), where('role', '==', 'freelancer'))
+      )
+      
+      const notifications = freelancersSnapshot.docs.map((freelancerDoc) => ({
+        user_id: freelancerDoc.id,
+        type: 'new_task' as const,
+        title: 'New Task Available',
+        message: `A new task "${data.title}" has been posted. Budget: ₹${data.budget.toLocaleString()}`,
+        task_id: docRef.id,
+        read: false,
+        created_at: Timestamp.now(),
+      }))
+
+      // Create notifications in batch (Firestore allows up to 500 operations per batch)
+      // For simplicity, we'll create them individually (can be optimized later)
+      for (const notification of notifications) {
+        await addDoc(collection(db, 'notifications'), notification)
+      }
+    } catch (error) {
+      // Don't fail task creation if notification fails
+      console.error('Failed to create notifications:', error)
+    }
+    
+    return newTask
   },
 
   async getTasks(filters?: {

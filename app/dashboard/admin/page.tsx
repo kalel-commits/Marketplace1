@@ -162,56 +162,82 @@ export default function AdminDashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-black py-8">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+              <p className="text-gray-600 mt-1">Manage users, tasks, and applications</p>
+            </div>
             <Button onClick={loadData} variant="secondary">
-              Refresh Data
+              🔄 Refresh Data
             </Button>
           </div>
 
           {/* Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="p-6">
-              <div className="text-sm font-medium text-gray-600">Total Users</div>
-              <div className="mt-2 text-3xl font-bold text-primary-500">{stats.totalUsers}</div>
-              <div className="text-xs text-gray-500 mt-1">
-                {stats.businessOwners} Business Owners, {stats.freelancers} Freelancers
+            <Card className="p-6 bg-gradient-to-br from-primary-50 to-primary-100 border-primary-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-medium text-primary-700">Total Users</div>
+                  <div className="mt-2 text-3xl font-bold text-primary-600">{stats.totalUsers}</div>
+                  <div className="text-xs text-primary-600 mt-2">
+                    {stats.businessOwners} Business Owners, {stats.freelancers} Freelancers
+                  </div>
+                </div>
+                <div className="text-4xl opacity-20">👥</div>
               </div>
             </Card>
-            <Card className="p-6">
-              <div className="text-sm font-medium text-gray-600">Total Tasks</div>
-              <div className="mt-2 text-3xl font-bold text-blue-400">{stats.totalTasks}</div>
-              <div className="text-xs text-gray-500 mt-1">
-                {stats.openTasks} Open, {stats.inProgressTasks} In Progress, {stats.completedTasks} Completed
+            <Card className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-medium text-blue-700">Total Tasks</div>
+                  <div className="mt-2 text-3xl font-bold text-blue-600">{stats.totalTasks}</div>
+                  <div className="text-xs text-blue-600 mt-2">
+                    {stats.openTasks} Open, {stats.inProgressTasks} In Progress, {stats.completedTasks} Completed
+                  </div>
+                </div>
+                <div className="text-4xl opacity-20">📋</div>
               </div>
             </Card>
-            <Card className="p-6">
-              <div className="text-sm font-medium text-gray-600">Total Applications</div>
-              <div className="mt-2 text-3xl font-bold text-green-400">{stats.totalApplications}</div>
-              <div className="text-xs text-gray-500 mt-1">
-                {stats.pendingApplications} Pending, {stats.acceptedApplications} Accepted, {stats.rejectedApplications} Rejected
+            <Card className="p-6 bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-medium text-green-700">Total Applications</div>
+                  <div className="mt-2 text-3xl font-bold text-green-600">{stats.totalApplications}</div>
+                  <div className="text-xs text-green-600 mt-2">
+                    {stats.pendingApplications} Pending, {stats.acceptedApplications} Accepted, {stats.rejectedApplications} Rejected
+                  </div>
+                </div>
+                <div className="text-4xl opacity-20">📝</div>
               </div>
             </Card>
-            <Card className="p-6">
-              <div className="text-sm font-medium text-gray-600">System Status</div>
-              <div className="mt-2 text-sm text-green-400 font-semibold">All Systems Operational</div>
+            <Card className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm font-medium text-purple-700">System Status</div>
+                  <div className="mt-2 text-lg font-semibold text-green-600">✓ Operational</div>
+                  <div className="text-xs text-purple-600 mt-2">
+                    All services running
+                  </div>
+                </div>
+                <div className="text-4xl opacity-20">⚡</div>
+              </div>
             </Card>
           </div>
 
           {/* Tabs */}
           <div className="mb-6">
-            <div className="border-b border-gray-800">
-              <nav className="-mb-px flex space-x-8">
+            <div className="border-b border-gray-300 bg-white rounded-t-lg shadow-sm">
+              <nav className="-mb-px flex space-x-1 px-4">
                 {(['overview', 'users', 'tasks', 'applications'] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                    className={`py-4 px-6 border-b-2 font-medium text-sm transition-all ${
                       activeTab === tab
-                        ? 'border-primary-500 text-primary-500'
-                        : 'border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-300'
+                        ? 'border-primary-500 text-primary-600 bg-primary-50'
+                        : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -223,13 +249,20 @@ export default function AdminDashboard() {
 
           {/* Search Bar */}
           <div className="mb-6">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search users, tasks, or applications..."
+                className="w-full pl-10 pr-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm border bg-white text-gray-900"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
           </div>
 
           {/* Overview Tab */}
@@ -324,34 +357,34 @@ export default function AdminDashboard() {
           {/* Tasks Tab */}
           {activeTab === 'tasks' && (
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-white mb-4">All Tasks ({filteredTasks.length})</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">All Tasks ({filteredTasks.length})</h2>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-800">
-                  <thead className="bg-gray-800">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Title</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Category</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Budget</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Created</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Title</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Category</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Budget</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Location</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Created</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-gray-900 divide-y divide-gray-800">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {filteredTasks.map((task) => (
-                      <tr key={task.id} className="hover:bg-gray-800 transition-colors">
-                        <td className="px-6 py-4 text-sm font-medium text-white">
-                          <Link href={`/tasks/${task.id}`} className="text-primary-400 hover:text-primary-300 transition-colors">
+                      <tr key={task.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                          <Link href={`/tasks/${task.id}`} className="text-primary-600 hover:text-primary-800 transition-colors">
                             {task.title}
                           </Link>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{task.category}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">₹{task.budget.toLocaleString()}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{task.location}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{task.category}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₹{task.budget.toLocaleString()}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{task.location}</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <StatusBadge status={task.status} type="task" />
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                           {new Date(task.created_at).toLocaleDateString()}
                         </td>
                       </tr>
@@ -365,47 +398,47 @@ export default function AdminDashboard() {
           {/* Applications Tab */}
           {activeTab === 'applications' && (
             <Card className="p-6">
-              <h2 className="text-xl font-bold text-white mb-4">All Applications ({filteredApplications.length})</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">All Applications ({filteredApplications.length})</h2>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-800">
-                  <thead className="bg-gray-800">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Freelancer</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Instagram</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Task</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Proposed Price</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase">Applied</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Freelancer</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Instagram</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Task</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Proposed Price</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Applied</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-gray-900 divide-y divide-gray-800">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {filteredApplications.map((app) => (
-                      <tr key={app.id} className="hover:bg-gray-800 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                      <tr key={app.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {app.freelancer?.full_name || 'Unknown'}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                           {app.freelancer?.instagram_id ? (
                             <a 
                               href={`https://instagram.com/${app.freelancer.instagram_id}`} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-primary-400 hover:text-primary-300 transition-colors"
+                              className="text-primary-600 hover:text-primary-800 transition-colors"
                             >
                               @{app.freelancer.instagram_id}
                             </a>
                           ) : '-'}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-400">
-                          <Link href={`/tasks/${app.task_id}`} className="text-primary-400 hover:text-primary-300 transition-colors">
+                        <td className="px-6 py-4 text-sm text-gray-600">
+                          <Link href={`/tasks/${app.task_id}`} className="text-primary-600 hover:text-primary-800 transition-colors">
                             {app.task?.title || 'Task'}
                           </Link>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white">₹{app.proposed_price.toLocaleString()}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₹{app.proposed_price.toLocaleString()}</td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <StatusBadge status={app.status} type="application" />
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                           {new Date(app.created_at).toLocaleDateString()}
                         </td>
                       </tr>

@@ -13,6 +13,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showForgotPassword, setShowForgotPassword] = useState(false)
+  const [resetLoading, setResetLoading] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -117,15 +119,80 @@ export default function LoginPage() {
                 </Button>
               </div>
 
-              <div className="text-center">
+              <div className="flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={() => setShowForgotPassword(true)}
+                  className="text-sm text-primary-500 hover:text-primary-600 transition-colors"
+                >
+                  Forgot password?
+                </button>
                 <Link
                   href="/signup"
-                  className="text-primary-500 hover:text-primary-600 transition-colors"
+                  className="text-sm text-primary-500 hover:text-primary-600 transition-colors"
                 >
                   Don't have an account? Sign up
                 </Link>
               </div>
             </form>
+
+            {/* Forgot Password Modal */}
+            {showForgotPassword && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                <Card className="max-w-md w-full p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Reset Password</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Enter your email address and we'll send you a link to reset your password.
+                  </p>
+                  <form
+                    onSubmit={async (e) => {
+                      e.preventDefault()
+                      if (!email.trim()) {
+                        toast.error('Please enter your email')
+                        return
+                      }
+                      setResetLoading(true)
+                      try {
+                        await auth.resetPassword(email.trim())
+                        toast.success('Password reset email sent! Check your inbox.')
+                        setShowForgotPassword(false)
+                      } catch (error: any) {
+                        toast.error(error.message || 'Failed to send reset email')
+                      } finally {
+                        setResetLoading(false)
+                      }
+                    }}
+                    className="space-y-4"
+                  >
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      required
+                      className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm px-3 py-2 border bg-white text-gray-900"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <div className="flex space-x-3">
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        onClick={() => setShowForgotPassword(false)}
+                        className="flex-1"
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        type="submit"
+                        isLoading={resetLoading}
+                        className="flex-1"
+                      >
+                        Send Reset Link
+                      </Button>
+                    </div>
+                  </form>
+                </Card>
+              </div>
+            )}
           </Card>
         </div>
       </div>

@@ -104,3 +104,14 @@ export interface Application {
   task?: Task
 }
 
+export interface Notification {
+  id: string
+  user_id: string
+  type: 'new_task' | 'application_accepted' | 'application_rejected'
+  title: string
+  message: string
+  task_id?: string
+  read: boolean
+  created_at: string
+}
+

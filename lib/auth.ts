@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
+  sendPasswordResetEmail,
   User as FirebaseUser,
   onAuthStateChanged,
 } from 'firebase/auth'
@@ -67,6 +68,11 @@ export const authUtils = {
   async signOut() {
     if (!firebaseAuth) throw new Error('Firebase not initialized')
     await firebaseSignOut(firebaseAuth)
+  },
+
+  async resetPassword(email: string) {
+    if (!firebaseAuth) throw new Error('Firebase not initialized')
+    await sendPasswordResetEmail(firebaseAuth, email)
   },
 
   async getCurrentUser(): Promise<User | null> {
